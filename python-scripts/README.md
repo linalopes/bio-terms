@@ -63,3 +63,54 @@ To comply with Google Sheets API limits (`Write requests per minute per user`), 
 At the end of the notebook, a breakdown is provided to show what percentage of rows were successfully processed (`OK`) and how many failed (`ERROR`), due to blocked access or invalid content.
 
 ---
+
+## 2-semantic-analysis-openai.ipynb
+
+**Purpose:**
+This Jupyter Notebook performs semantic analysis on previously extracted text data from Google Alerts. It focuses specifically on rows in `Sheet0` where `wordAlert == "bioart"`. For each relevant row, it uses the OpenAI API to generate:
+
+- A clean and complete **language** label (fallback if missing)
+- A corrected or inferred **country**
+- A 1–2 sentence **summary** of the article
+- A **semantic universe** representing topics, domains, or themes
+- A list of **keywords** related to the content
+
+**Workflow:**
+1. Load `.env` variables and authenticate with both Google Sheets and OpenAI API.
+2. Read all rows from `Sheet0`, filtering only entries where `wordAlert == "bioart"`.
+3. For each filtered row:
+   - Use existing `detected-language` and `detected-country` values if available.
+   - If language is coded (e.g., `"de"`), it is translated to full name (e.g., `"German"`).
+   - If country is `"unknown"` or missing, OpenAI is prompted to infer it.
+   - OpenAI is always used to generate: summary, semantic universe, and keywords.
+4. To stay within OpenAI token limits, long texts are truncated before analysis.
+5. All results are written back to the original `Sheet0` in columns J through N.
+
+**Columns updated:**
+
+| Column | Field             |
+|--------|-------------------|
+| J      | Language (final)  |
+| K      | Country (final)   |
+| L      | Summary           |
+| M      | Semantics         |
+| N      | Keywords          |
+
+**OpenAI Integration Notes:**
+- Uses the new `openai>=1.0.0` interface.
+- All API responses are requested in structured **JSON** format to improve reliability and parsing.
+- Token length of input text is controlled to avoid exceeding model context limits.
+- You can switch models by changing `model="gpt-3.5-turbo"` to another supported OpenAI model.
+
+**Environment Variables Required:**
+
+In addition to the variables used in previous notebooks, you must also include:
+
+```env
+OPENAI_API_KEY=your_openai_api_key
+```
+
+**Important:**
+
+- You are responsible for OpenAI API usage costs. Monitor your usage if you run batch operations.
+- Responses are cached in the sheet to avoid unnecessary re-analysis.
