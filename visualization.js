@@ -29,22 +29,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const countryNameMap = {
-    "USA": "United States",
-    "U.S.A.": "United States",
-    "United States of America": "United States",
-    "UK": "United Kingdom",
-    "U.K.": "United Kingdom",
-    "England": "United Kingdom",
-    "Brasil": "Brazil",
-    "South Korea": "Republic of Korea",
-    "Korea, South": "Republic of Korea",
-    "Russia": "Russian Federation",
-    "Czechia": "Czech Republic",
-    "Iran": "Iran (Islamic Republic of)",
-    "Syria": "Syrian Arab Republic",
-    "Venezuela": "Venezuela (Bolivarian Republic of)"
-    // Adicione mais conforme necessário
+    "United States": "USA",
+    "United States of America": "USA",
+    "United Kingdom": "England",
+    "Republic of Korea": "South Korea",
+    "Russian Federation": "Russia",
+    "Iran (Islamic Republic of)": "Iran",
+    "Syrian Arab Republic": "Syria",
+    "Venezuela (Bolivarian Republic of)": "Venezuela",
+    "Serbia": "Republic of Serbia"
+    // Add more as needed
   };
+
   function normalizeCountryName(name) {
     const trimmed = name.trim();
     return countryNameMap[trimmed] || trimmed;
@@ -112,9 +108,14 @@ document.addEventListener('DOMContentLoaded', function () {
         .attr("cx", d => {
           const normalizedCountry = normalizeCountryName(d.country);
           const countryFeature = geoData.features.find(f => f.properties.name === normalizedCountry);
+
+          if (!countryFeature) {
+              console.warn("NOT FOUND:", normalizedCountry);
+          }
+
           if (countryFeature) {
-            const coordinates = projection(d3.geoCentroid(countryFeature));
-            return coordinates ? coordinates[0] : null;
+              const coordinates = projection(d3.geoCentroid(countryFeature));
+              return coordinates ? coordinates[0] : null;
           }
           return null;
         })
