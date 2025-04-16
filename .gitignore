@@ -1,5 +1,7 @@
 **/.DS_Store
-**/credentials.json
+.env
+*.json
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
