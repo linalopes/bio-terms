@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
     "Iran (Islamic Republic of)": "Iran",
     "Syrian Arab Republic": "Syria",
     "Venezuela (Bolivarian Republic of)": "Venezuela",
-    "Serbia": "Republic of Serbia"
+    "Serbia": "Republic of Serbia",
+    "Singapore": "Malaysia"
     // Add more as needed
   };
 
