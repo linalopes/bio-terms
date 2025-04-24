@@ -1,0 +1,21 @@
+{
+  "name": "bio-terms",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "svelte": "^5.23.1",
+    "vite": "^6.3.1"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "mapbox-gl": "^3.11.0",
+    "papaparse": "^5.5.2"
+  }
+}
