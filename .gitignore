@@ -1,0 +1,47 @@
+# --- DEPENDENCIES AND BUILD ---
+node_modules/
+dist/
+build/
+out/
+*.local
+
+# --- VITE / SVELTE ---
+.vite/
+*.tsbuildinfo
+
+# --- CREDENTIALS / ENVIRONMENT ---
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+*.crt
+*.cert
+*.jks
+*.pfx
+
+# Files with possible secrets
+*.json.secret
+*.credentials.json
+*.private.json
+
+1-python-scripts/creativity-in-vitro-fca3a5812ada.json
+
+# --- SYSTEM / TEMPORARY ---
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+*.bak
+
+# --- IDEs ---
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.code-workspace
+
+# --- TESTS / CACHE ---
+coverage/
+.cache/
+jest-cache/
